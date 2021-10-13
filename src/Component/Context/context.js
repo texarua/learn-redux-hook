@@ -1,6 +1,6 @@
 import React from "react";
 import { Component } from "react";
-
+import { useEffect, useState } from "react/cjs/react.development";
 
 export const MyContext = React.createContext()
 
@@ -44,7 +44,7 @@ class ContextCart extends Component {
         return (
             <MyContext.Provider
                 value={{
-                    state: this.state,
+                    cart: this.state.cart,
                     addToCart: (product) => this.addToCart(product),
                     addToWishList : (id) => this.addToWishList(id)
             }}>

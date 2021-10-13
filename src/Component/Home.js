@@ -3,7 +3,6 @@ import { Component } from "react";
 import api, { urlProductImage } from "./api";
 import Pagination from "react-js-pagination";
 import { Link } from 'react-router-dom';
-import { MyContext } from "./Context/ContextCart";
 
 function Home(props) {
     const [products, setProducts] = useState({})
@@ -49,14 +48,9 @@ function Home(props) {
                             </div>
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
-                                    <MyContext>
-                                        {context => (
-                                            <React.Fragment>
-                                                <li><a onClick={() => context.addToWishList(item.id)}><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                            </React.Fragment>
-                                        )}
-                                    
-                                    </MyContext>
+
+                                                <li><a ><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+
                                     <li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
                                 </ul>
                             </div>

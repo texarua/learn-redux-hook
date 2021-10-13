@@ -7,7 +7,7 @@ import {
     useRouteMatch
 } from "react-router-dom";
 import  { Redirect } from 'react-router-dom'
-import { MyContext } from '../Context/ContextCart';
+import { MyContext } from '../Context/context';
 
 class Header extends Component {
 
@@ -104,17 +104,16 @@ class Header extends Component {
                       <div className="shop-menu clearfix pull-right">
                         <ul className="nav navbar-nav">
                       <li><a href="/account"><i className="fa fa-user" /> Account</a></li>
-                      <MyContext>
-                        {context => (
-                          <React.Fragment>
-                          <li><a href>{ Object.keys(context.state.wishList) ? Object.keys(context.state.wishList).length: 0 }<i className="fa fa-star" /> Wishlist</a></li>
-                          <li><a href="checkout.html"><i className="fa fa-crosshairs" /> Checkout</a></li>
-                      
-                              <li><a href="cart.html">{ Object.keys(context.state.cart) ? Object.keys(context.state.cart).length: 0 }<i className="fa fa-shopping-cart" /> Cart </a></li>
-                          </React.Fragment>
-                      )}
-                      </MyContext>
 
+                          <li><a href><i className="fa fa-star" /> Wishlist</a></li>
+                          <li><a href="checkout.html"><i className="fa fa-crosshairs" /> Checkout</a></li>
+                      <MyContext>
+                        {(context) => (
+                          <React.Fragment>
+                            <li><a href="cart.html"><i className="fa fa-shopping-cart" />{ context.cart ? Object.keys(context.cart).length : 0} Cart </a></li>
+                          </React.Fragment>
+                        ) }
+                      </MyContext>
                           { this.renderLogin() }
                         </ul>
                       </div>

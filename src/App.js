@@ -7,8 +7,7 @@ import Header from './Component/Layout/Header';
 import Footer from './Component/Layout/Footer';
 import MenuLeft from './Component/Layout/MenuLeft';
 import MenuAccount from './Component/Layout/MenuAcount';
-import MyContext from './Component/Context/ContextCart';
-import ContextCart from './Component/Context/ContextCart';
+import ContextCart from './Component/Context/context';
 
 class App extends Component {
   constructor(props) {
@@ -44,7 +43,7 @@ class App extends Component {
         </div>
       </section>
           <Footer />
-          </ContextCart>
+        </ContextCart>
       </>
     );
   }

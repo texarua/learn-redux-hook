@@ -16,6 +16,8 @@ import Blog from './Component/Blog';
 import DetailBlog from './Component/Blog/detail';
 import LoginSginup from './Component/Account/login-signup';
 import UpdateUser from './Component/Account/update';
+import ProductList from './Component/Product/list';
+import Detail from './Component/Product/Detail';
 
 ReactDOM.render(
  <Router>
@@ -23,15 +25,15 @@ ReactDOM.render(
         
             <Switch>
                 <Route exact path='/' component={Home}></Route>
-                {/* <Route exact path='/blog-hook/list' component={BlogHook}></Route>
-                <Route exact path='/blog-hook/detail/:id' component={DetailBlogHook}></Route>
-                <Route exact path='/product/detail/:id' component={ Detail } ></Route> */}
+                 {/* <Route exact path='/blog-hook/list' component={BlogHook}></Route>
+                <Route exact path='/blog-hook/detail/:id' component={DetailBlogHook}></Route> */}
+                <Route exact path='/product/detail/:id' component={ Detail } ></Route>
                     <Route path='/blog/list' component={Blog} ></Route>
                     <Route path='/blog/detail/:id' component={DetailBlog} ></Route>
                     <Route path='/login' component={LoginSginup}></Route>
                     <Route path='/account' component={UpdateUser}></Route>
-                    {/* <Route path='/user/product/list' component={ProductList}></Route>
-                <Route path='/user/product/add' component={ProductAdd}></Route>
+                    <Route path='/user/product/list' component={ProductList}></Route>
+                { /*<Route path='/user/product/add' component={ProductAdd}></Route>
                 <Route path='/user/product/edit/:id' component={ProductUpdate}></Route> */}
                 
                 </Switch>
