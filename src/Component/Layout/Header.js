@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     BrowserRouter as Router,
     Switch,
@@ -7,42 +8,33 @@ import {
     useRouteMatch
 } from "react-router-dom";
 import  { Redirect } from 'react-router-dom'
-import { MyContext } from '../Context/context';
+// import { MyContext } from '../Context/context';
 
-class Header extends Component {
+function Header (props) {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      cart: {}
-    }
-    this.doLogout = this.doLogout.bind(this);
-  }
+  const cart = useSelector(state => state.cartReducer.cart)
+  const dispatch = useDispatch()
+  // componentDidMount() {
+  //   this.setState({
+  //     cart: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {}
+  //   })
+  // }
 
-  componentDidMount() {
-    this.setState({
-      cart: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {}
-    })
-  }
-
-  doLogout() {
+  function doLogout() {
     localStorage.removeItem('auth')
     localStorage.removeItem('token')
   }
 
-  renderLogin() {
-    if (!this.props.isLogged) {
+  function renderLogin() {
+    if (!props.isLogged) {
       return <li><a href="/login"><i className="fa fa-lock" /> Login</a></li>
     } else {
-      return <li><a href="#" onClick={ this.doLogout }><i className="fa fa-lock" /> Logout</a></li>
+      return <li><a href="#" onClick={ doLogout }><i className="fa fa-lock" /> Logout</a></li>
     }
   }
-  render() {
-    console.log(this.props)
-    let { cart } = this.state
+  
     return (
       <div>
-        
             {/*/head*/}
             <header id="header">{/*header*/}
               <div className="header_top">{/*header_top*/}
@@ -107,14 +99,16 @@ class Header extends Component {
 
                           <li><a href><i className="fa fa-star" /> Wishlist</a></li>
                           <li><a href="checkout.html"><i className="fa fa-crosshairs" /> Checkout</a></li>
-                      <MyContext>
+                      {/* <MyContext>
                         {(context) => (
                           <React.Fragment>
                             <li><a href="cart.html"><i className="fa fa-shopping-cart" />{ context.cart ? Object.keys(context.cart).length : 0} Cart </a></li>
                           </React.Fragment>
                         ) }
-                      </MyContext>
-                          { this.renderLogin() }
+                      </MyContext> */}
+                      <li><a href="cart.html"><i className="fa fa-shopping-cart" />{ cart ? Object.keys(cart).length : 0} Cart </a></li>
+                      {renderLogin()}
+                      
                         </ul>
                       </div>
                     </div>
@@ -167,6 +161,6 @@ class Header extends Component {
             </header>{/*/header*/}
         </div>
         );
-      }
+      
 }
 export default Header

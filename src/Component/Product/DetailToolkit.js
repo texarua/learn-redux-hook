@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import { Component } from "react";
+import { useDispatch } from "react-redux";
 import { useState } from "react/cjs/react.development";
 import api, { getConfig, urlProductImage } from "../api";
 import ContextCart, { MyContext } from "../Context/context";
+import { addCart } from "./CartToolKit/CartSlice";
 
-function Detail(props) {
+function DetailToolkit(props) {
     const [product, setProduct] = useState(null)
     const [quantity, setQuantity] = useState(1)
     const [userData, setUserData] = useState(localStorage['auth'] ? JSON.parse(localStorage['auth']) : null)
     const [cart, setCart] = useState(localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {})
-    
+    const dispatch = useDispatch()
+
     useEffect(
         () => {
                 api.get('product/detail/' + props.match.params.id)
@@ -79,7 +82,7 @@ function Detail(props) {
                                 <span>US { product.status == 1 ? (product.sale ? '$'+product.sale : 0) : '$'+product.price }</span>
                                 <label>Quantity:</label>
                                 <input name="quantity" type="text" onChange={e => setQuantity(e.target.value)} value={quantity} />
-                                <MyContext>
+                                {/* <MyContext>
                                     {(context) => (
                                         <React.Fragment>
                                             <button onClick={() => context.addToCart({
@@ -91,7 +94,20 @@ function Detail(props) {
                                         </React.Fragment>
                                     )}
                                             
-                            </MyContext>
+                            </MyContext> */}
+                                {/* <button onClick={() => dispatch({
+                                    type: 'add', payload: {
+                                        id : product.id, quantity : quantity
+                                    }
+                                })} type="button" class="btn btn-fefault cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                Add to cart
+                                </button> */}
+                                <button onClick={() => dispatch(addCart({id : product.id, quantity: quantity}))} type="button" class="btn btn-fefault cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                Add to cart
+                                </button>
+                                
                             </span>
                             <p><b>Availability:</b> In Stock</p>
                             <p><b>Condition:</b> New</p>
@@ -396,4 +412,4 @@ function Detail(props) {
     )
 
 }
-export default Detail
+export default DetailToolkit
